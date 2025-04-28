@@ -1,0 +1,13 @@
+.header {
+  @include flex-center;
+  padding: $spacing-unit * 2;
+  background: $primary-color;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .header-title {
+    font-size: 1.5rem;
+    color: $accent-color;
+  }
+}

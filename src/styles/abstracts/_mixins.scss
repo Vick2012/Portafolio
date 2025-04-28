@@ -1,0 +1,12 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin glassmorphism {
+  background: $card-bg;
+  border: $card-border;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

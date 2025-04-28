@@ -1,0 +1,24 @@
+.profile {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-unit * 3;
+  text-align: center;
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: $spacing-unit;
+    border: 2px solid $accent-color;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+    color: $accent-color;
+  }
+
+  .profile-title {
+    font-size: 1.2rem;
+    color: $text-color;
+  }
+}

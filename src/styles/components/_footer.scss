@@ -1,0 +1,19 @@
+.footer {
+  @include flex-center;
+  padding: $spacing-unit;
+  background: $primary-color;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  color: $text-color;
+
+  .footer-link {
+    color: $accent-color;
+    margin: 0 0.5rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

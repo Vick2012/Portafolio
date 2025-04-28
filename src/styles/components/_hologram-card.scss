@@ -1,0 +1,21 @@
+.hologram-card {
+  @include glassmorphism;
+  padding: $spacing-unit * 2;
+  margin: $spacing-unit;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    color: $accent-color;
+  }
+
+  .card-content {
+    color: $text-color;
+  }
+}
