@@ -3,15 +3,17 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,scss}\"",
-        "stylelint": "stylelint \"src/**/*.scss\"",
-        "preview": "vite preview",
-        "prepare": "husky install"
-    },
+   "scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "lint": "eslint src",
+  "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,scss}\"",
+  "stylelint": "stylelint \"src/**/*.scss\"",
+  "preview": "vite preview",
+  "prepare": "husky install",
+  "start": "vite"
+},
+
     "dependencies": {
         "gsap": "^3.12.7",
         "react": "^18.3.1",
