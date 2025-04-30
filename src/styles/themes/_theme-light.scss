@@ -1,0 +1,9 @@
+@use "../abstracts/variables" as *;
+
+:root[data-theme="light"] {
+  --primary-color: #{$primary-color-light};
+  --background-color: #{$background-color-light};
+  --text-color: #{$text-color-light};
+  --card-background: #{$card-background-light};
+  --card-border: #{$card-border-light};
+}

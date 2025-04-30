@@ -1,59 +1,137 @@
-import * as THREE from 'three';
+﻿import * as THREE from "three";
 
-export const initParticles = () => {
-  const canvas = document.createElement('canvas');
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.zIndex = '-1';
-  document.body.appendChild(canvas);
+export const initParticleEffects = () => {
+  const canvas = document.getElementById(
+    "particle-canvas",
+  ) as HTMLCanvasElement;
+  if (!canvas) {
+    console.error("No se encontró el elemento #particle-canvas en el DOM");
+    return;
+  }
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     0.1,
-    1000
+    1000,
   );
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  camera.position.z = 50;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 5000;
-  const posArray = new Float32Array(particlesCount * 3);
+  const particleCount = 1000;
+  const positions = new Float32Array(particleCount * 3);
+  const velocities = new Float32Array(particleCount * 3);
 
-  for (let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 100;
+  for (let i = 0; i < particleCount; i++) {
+    const i3 = i * 3;
+    positions[i3] = (Math.random() - 0.5) * 100;
+    positions[i3 + 1] = (Math.random() - 0.5) * 100;
+    positions[i3 + 2] = (Math.random() - 0.5) * 100;
+
+    velocities[i3] = (Math.random() - 0.5) * 0.05;
+    velocities[i3 + 1] = (Math.random() - 0.5) * 0.05;
+    velocities[i3 + 2] = (Math.random() - 0.5) * 0.05;
   }
 
-  particlesGeometry.setAttribute(
-    'position',
-    new THREE.BufferAttribute(posArray, 3)
-  );
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-  const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.1,
-    color: 0x00ffcc,
+  const createCircularTexture = (): THREE.Texture => {
+    const size = 64;
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    const radius = size / 2;
+
+    const gradient = ctx.createRadialGradient(
+      radius,
+      radius,
+      0,
+      radius,
+      radius,
+      radius,
+    );
+    gradient.addColorStop(0, "rgba(255, 255, 255, 0.8)");
+    gradient.addColorStop(0.4, "rgba(255, 255, 255, 0.3)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(radius, radius, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    return new THREE.CanvasTexture(canvas);
+  };
+
+  const material = new THREE.PointsMaterial({
+    size: 6,
+    map: createCircularTexture(),
     transparent: true,
-    opacity: 0.8,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
   });
 
-  const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-  scene.add(particlesMesh);
+  const updateParticleColor = () => {
+    const textColor = getComputedStyle(document.documentElement)
+      .getPropertyValue("--text-color")
+      .trim();
+    material.color.set(textColor);
+  };
 
-  camera.position.z = 5;
+  updateParticleColor();
+
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
+
+  const clock = new THREE.Clock();
 
   const animate = () => {
     requestAnimationFrame(animate);
-    particlesMesh.rotation.y += 0.001;
+
+    const delta = clock.getDelta();
+
+    for (let i = 0; i < particleCount; i++) {
+      const i3 = i * 3;
+      positions[i3] += velocities[i3] * delta * 60;
+      positions[i3 + 1] += velocities[i3 + 1] * delta * 60;
+      positions[i3 + 2] += velocities[i3 + 2] * delta * 60;
+
+      for (let j = 0; j < 3; j++) {
+        if (positions[i3 + j] > 50 || positions[i3 + j] < -50)
+          velocities[i3 + j] *= -1;
+      }
+    }
+
+    geometry.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
   };
 
   animate();
 
-  window.addEventListener('resize', () => {
+  const observer = new MutationObserver((mutations) => {
+    if (mutations.some((m) => m.attributeName === "data-theme"))
+      updateParticleColor();
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  const handleResize = () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  };
+  window.addEventListener("resize", handleResize);
+
+  console.log("Partículas inicializadas correctamente");
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    observer.disconnect();
+  };
 };

@@ -1,0 +1,27 @@
+@use "../abstracts/variables" as vars;
+
+.skills {
+  padding: 2rem;
+  text-align: center;
+
+  h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+
+    .skill {
+      background: var(--card-border);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      color: var(--text-color);
+    }
+  }
+}

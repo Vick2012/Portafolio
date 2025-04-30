@@ -1,19 +1,37 @@
-import React from 'react';
-
 const Profile: React.FC = () => {
   return (
     <section className="profile">
-      <img
-        src="https://via.placeholder.com/150"
-        alt="Profile"
-        className="profile-image"
-      />
-      <h2 className="profile-name">Tu Nombre</h2>
-      <p className="profile-title">Desarrollador Web | Experto en UI/UX</p>
+      <h1>Victor Alfonso AlarcÃ³n Ospina</h1>
       <p>
-        Apasionado por crear experiencias digitales únicas con tecnologías
-        modernas como React, TypeScript y Three.js.
+        Ingeniero de Software | Apasionado por la tecnologÃ­a y por los desafÃ­os
       </p>
+      <div className="social-links">
+        <a
+          href="https://github.com/Vick2012"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>{" "}
+        |{" "}
+        <a
+          href="https://linkedin.com/in/victoralarcon"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>{" "}
+        |{" "}
+        <a
+          href="https://www.instagram.com/victoralarcon/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a>{" "}
+        |{" "}
+        <a href="mailto:victorsloan2012@gmail.com">victorsloan2012@gmail.com</a>
+      </div>
     </section>
   );
 };

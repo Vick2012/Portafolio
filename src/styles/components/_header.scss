@@ -1,13 +1,11 @@
-.header {
-  @include flex-center;
-  padding: $spacing-unit * 2;
-  background: $primary-color;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+﻿header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 
-  .header-title {
-    font-size: 1.5rem;
-    color: $accent-color;
+  h1 {
+    color: var(--text-color);
+    font-size: 2rem;
   }
 }

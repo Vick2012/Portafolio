@@ -1,18 +1,4 @@
-h1,
-h2,
-h3 {
-  color: $accent-color;
-  margin-bottom: $spacing-unit;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-p {
-  margin-bottom: $spacing-unit;
+body {
+  font-family: var(--font-family, "Inter", sans-serif);
+  color: var(--text-color);
 }

@@ -1,4 +1,9 @@
-body.dark-theme {
-  background: $background-color;
-  color: $text-color;
+@use "../abstracts/variables" as *;
+
+:root[data-theme="dark"] {
+  --primary-color: #{$primary-color-dark};
+  --background-color: #{$background-color-dark};
+  --text-color: #{$text-color-dark};
+  --card-background: #{$card-background-dark};
+  --card-border: #{$card-border-dark};
 }

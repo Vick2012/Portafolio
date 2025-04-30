@@ -1,24 +1,35 @@
 .profile {
-  @include flex-center;
-  flex-direction: column;
-  padding: $spacing-unit * 3;
   text-align: center;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 1;
 
-  .profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: $spacing-unit;
-    border: 2px solid $accent-color;
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
   }
 
-  .profile-name {
-    font-size: 2rem;
-    color: $accent-color;
-  }
-
-  .profile-title {
+  p {
     font-size: 1.2rem;
-    color: $text-color;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--text-color);
+      }
+    }
   }
 }

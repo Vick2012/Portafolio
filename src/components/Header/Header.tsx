@@ -1,9 +1,10 @@
-import React from 'react';
+﻿import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 const Header: React.FC = () => {
   return (
-    <header className="header">
-      <h1 className="header-title">Mi CV Futurista</h1>
+    <header>
+      <h1>Victor Alfonso Alarcón Ospina</h1>
+      <ThemeToggle />
     </header>
   );
 };

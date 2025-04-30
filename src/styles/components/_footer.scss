@@ -1,19 +1,11 @@
 .footer {
-  @include flex-center;
-  padding: $spacing-unit;
-  background: $primary-color;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  color: $text-color;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--card-border);
 
-  .footer-link {
-    color: $accent-color;
-    margin: 0 0.5rem;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  p {
+    color: var(--text-color);
+    opacity: 0.7;
   }
 }

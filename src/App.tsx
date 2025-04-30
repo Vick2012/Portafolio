@@ -1,58 +1,80 @@
-import React, { useEffect } from 'react';
-import Header from './components/Header/Header';
-import Profile from './components/Profile/Profile';
-import HologramCard from './components/HologramCard/HologramCard';
-import Footer from './components/Footer/Footer';
-import './styles/main.scss';
-import { initAnimations } from './scripts/gsap/gsapAnimations';
-import { initParticles } from './scripts/threejs/particleEffects';
+import { useEffect } from "react";
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
+import PersonalInfoCard from "./components/PersonalInfoCard/PersonalInfoCard";
+import Skills from "./components/Skills/Skills";
+import Profile from "./components/Profile/Profile";
+import HologramCard from "./components/HologramCard/HologramCard";
+import Footer from "./components/Footer/Footer";
+import { initParticleEffects } from "./scripts/threejs/particleEffects";
+import "./styles/main.scss";
+
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  technologies: string[];
+}
 
 const App: React.FC = () => {
   useEffect(() => {
-    initAnimations();
-    initParticles();
+    initParticleEffects();
   }, []);
 
+  const projects: Project[] = [
+    {
+      title: "Sistema de Gesti√≥n ERP",
+      description:
+        "Es un sistema de gesti√≥n empresarial especializado en controlar, planificar y optimizar todas las operaciones log√≠sticas de una empresa. Este tipo de ERP permite integrar en una sola plataforma todos los procesos.",
+      link: "https://github.com/Vick2012/ERP-pc.git",
+      technologies: ["React", "Node.js", "MongoDB"],
+    },
+    {
+      title: "API de Tareas",
+      description:
+        "Una API RESTful que permite gestionar tareas de manera eficiente y segura. La autenticaci√≥n de los usuarios se implementar√≥ con JWT (JSON Web Tokens), garantizando as√≠ que solo los usuarios autorizados puedan acceder a los recursos protegidos..",
+      link: "https://github.com/Vick2012/Api.git",
+      technologies: ["FastAPI", "PostgreSQL", "Python"],
+    },
+    {
+      title: "Portafolio Personal",
+      description:
+        "Mi sitio web personal para mostrar mis proyectos y habilidades.",
+      link: "https://github.com/Vick2012/Portafolio.git",
+      technologies: ["React", "TypeScript", "Three.js"],
+    },
+  ];
+
   return (
-    <div className="main-layout">
-      <Header />
-      <main>
+    <div className="app">
+      <canvas
+        id="particle-canvas"
+        style={{ position: "fixed", top: 0, left: 0, zIndex: -1 }}
+      />
+      <div className="main-layout">
+        <header>
+          <ThemeToggle />
+        </header>
         <Profile />
-        <section>
-          <h2>Experiencia</h2>
-          <HologramCard
-            title="Desarrollador Frontend"
-            content="TrabajÈ en XYZ Company (2022-2025), desarrollando aplicaciones web con React y TypeScript."
-          />
-          <HologramCard
-            title="DiseÒador UI/UX"
-            content="ColaborÈ en ABC Studio (2020-2022), diseÒando interfaces intuitivas y modernas."
-          />
+        <section className="content">
+          <PersonalInfoCard />
+          <Skills />
+          <div className="projects-section">
+            <h2>Completed Projects</h2>
+            <div className="projects-container">
+              {projects.map((project) => (
+                <HologramCard
+                  key={project.title}
+                  title={project.title}
+                  description={project.description}
+                  link={project.link}
+                  technologies={project.technologies}
+                />
+              ))}
+            </div>
+          </div>
         </section>
-        <section>
-          <h2>Habilidades</h2>
-          <HologramCard
-            title="TecnologÌas"
-            content="React, TypeScript, GSAP, Three.js, SCSS, Vite"
-          />
-          <HologramCard
-            title="Herramientas"
-            content="Figma, VS Code, Git, Webpack"
-          />
-        </section>
-        <section>
-          <h2>Proyectos</h2>
-          <HologramCard
-            title="CV Futurista"
-            content="Un CV web interactivo con animaciones 3D y efectos hologr·ficos."
-          />
-          <HologramCard
-            title="Portafolio Web"
-            content="Portafolio personal con diseÒo minimalista y responsive."
-          />
-        </section>
-      </main>
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 };

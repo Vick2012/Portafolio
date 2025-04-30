@@ -1,0 +1,51 @@
+.personal-info-card {
+  // Fondo y bordes de la tarjeta
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+
+  // Bordes un poco redondeados
+  border-radius: 4px;
+
+  // Espaciado interno
+  padding: 1.5rem;
+
+  // Efecto de sombra para simular un brillo suave
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.25),
+    0 0 8px var(--glow-color, rgba(0, 174, 255, 0.3));
+
+  // Transición para suavizar el efecto en hover
+  transition: box-shadow 0.6s ease;
+
+  // Al pasar el mouse, aumenta el brillo
+  &:hover {
+    box-shadow:
+      0 5px 16px rgba(0, 0, 0, 0.3),
+      0 0 16px var(--glow-color, rgba(0, 195, 255, 0.5));
+  }
+
+  // Título principal
+  h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  // Subtítulo
+  h3 {
+    color: var(--text-color);
+    margin: 1rem 0 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  // Párrafos de texto
+  p {
+    margin: 0.5rem 0;
+    color: var(--text-color);
+  }
+
+  // Texto en negrita
+  strong {
+    color: var(--primary-color);
+  }
+}
